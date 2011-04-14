@@ -1,0 +1,13 @@
+Author: Josef Liska <josef.liska@virtualmaster.cz>
+
+Description: Configures network and users on first boot of VM
+  Virtualmaster package is a set of scripts to kickoff freshly installed
+  virtual machine. Most of tasks are performed only once, on first boot
+  Idea of this package is to have one universal distro-independent config
+  file and then set of distro-specific packages (e.g. .deb, .rpm, .tgz).
+  Main tasks are:
+    - set up networking (IP, gateway, nameservers) on first booot
+    - ensure swap partition has swap signature
+    - set root's password
+    - generate ssh keys if not present
+    - optionaly create users and add ssh keys
