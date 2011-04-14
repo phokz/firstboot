@@ -1,0 +1,20 @@
+Format: 1.7
+Date: Fri, 26 Jun 2009 16:34:09 +0200
+Source: virtualmaster-firstboot
+Binary: virtualmaster-firstboot
+Architecture: source all
+Version: 0.1-1
+Distribution: unstable
+Urgency: low
+Maintainer: Josef Liska <jl@chl.cz>
+Changed-By: Josef Liska <jl@chl.cz>
+Description: 
+ virtualmaster-firstboot - Configures network and users on first boot of VM
+Changes: 
+ virtualmaster-firstboot (0.1-1) unstable; urgency=low
+ .
+   * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+Files: 
+ 88985e1e9091a452a01e46c98ecef25f 287 unknown extra virtualmaster-firstboot_0.1-1.dsc
+ aba815cf09f173b2dbba2c487b792c22 13280 unknown extra virtualmaster-firstboot_0.1-1.tar.gz
+ 7dbe635c941da8ed83d2bddfaefbebad 13118 unknown extra virtualmaster-firstboot_0.1-1_all.deb

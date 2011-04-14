@@ -1,0 +1,18 @@
+#
+# configuration for first boot of virtual server
+#
+virtualmaster_version=1
+virtualmaster_eth0_mac=00:16:41:53:92:2e
+virtualmaster_ipv4_address=77.87.232.1
+virtualmaster_ipv4_netmask=255.255.255.0
+virtualmaster_ipv4_gateway=77.87.232.254
+virtualmaster_ipv4_nameservers="1.2.3.4 2.3.4.5"
+virtualmaster_ipv6_address=fe80::216:41ff:fe53:922e/64
+virtualmaster_hostname=n1k.netmilk.net
+virtualmaster_password_root=$1$M6hGyeKn$IARu/PzyrxBrPd.BEOKE40
+
+virtualmaster_create_users="user1 user2"
+virtualmaster_ssh_key_user1="ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAy9BLe9OMyVJGKsr9N/AdRXhHS3m97uKvBASrJd8SPu8t7teakMvCB1DBG2uyiDUT9RTHY+BMr3XtY2e25PQtCBk4UL+pM4bSOj6/5wXoklFcRoEb0Oh0Iu5mo81Fl0UCrvjQFHGErARp40jEXFzqCuNFpolM0g+YJ0CEuvQy4XWwHz+gNBnbSHDVeQD1A/Er44lwUxnNjmmmlfSN8SWiks8GnjC8a1Gvh+bzLv0VzY9SMOrvW/z/E3NZu2sCnmCAY7WRakYC7uGVHL0kWBRtzrEH0gnMsgOFlL+kC9JU+VzDjvGw/AZjum2BZLqIPmMuXRFYbGlkRgvIrXCC8uUlTw== user1@host1"
+virtualmaster_ssh_key_user2="ssh-dss AAAAB3NzaC1kc3MAAACBANsJjhLmsZkno4ZGT+tVU/IqL0ho6hRpabb7DllhdmTTAhZqwP87UUGm1Y9osIimxVHMCoD1tlsOXLA+hx5sZvWuJRGZdDJgFyGo45chvL0s5vl6N/L/t6k6Ff2SBMwnKqctK0TAA4lADf+VqJsSdsXoaBjODEv5ayrwYPEwIMQ/AAAAFQCqdW0EtCzKZZ/K96WwB//3ARvCiQAAAIEAmc8cNX3qg64YsZBOubTFN3CiLUp1XSQqzLfP/1s02r1xFf7PHOi2rjRycx3OiCJAJsSOgzVixbSyYOxGoD8T/912FrIJ5BE7FhEJLUlRf8v1GPAI/uCcIBvGjN6tQzA1/UZfn1KWPnEbIAlTFGOFaVs7Eg++hQdMVL05L4QT/BcAAACBAKmhl1iq8OHYlQQwd+vqynOQHU1WXq/RdC6p32RzClG/zcHM5qzUh/cNntPAEzVXn7hIxYk0GoYZGYs0+6YjmjFRRvit4Cd5eo7Zdwih5+pojEMlv2HnX7EV80NAaClPVzr0ff+TGYa/4bUeRzKH+79RHfxO2Ryra5ketA9Ciw/M user2@host2"
+virtualmaster_password_user1='$1$hFn1wXtv$59KvWB/iUg0BA9d2n86py.'
+virtualmaster_password_user2='$1$b.64kQRG$OyyBccQuqN2Lt8F5Cx9lJ1'

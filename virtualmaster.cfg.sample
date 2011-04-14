@@ -1,0 +1,17 @@
+#
+# configuration for first boot of virtual server
+#
+virtualmaster_version=1
+virtualmaster_eth0_mac=00:16:41:53:92:2e
+virtualmaster_ipv4_address=80.79.29.56
+virtualmaster_ipv4_netmask=255.255.255.0
+virtualmaster_ipv4_gateway=80.79.29.1
+virtualmaster_ipv4_nameservers="81.31.33.23 80.79.16.5"
+#virtualmaster_ipv6_address=fe80::216:41ff:fe53:922e/64
+virtualmaster_hostname=supern1k.netmilk.net
+virtualmaster_password_root='$1$B/5jojWm$m7pcJ/8K9oGAQ5FHNUdri/'
+
+virtualmaster_create_users="jl netmilk mario"
+virtualmaster_ssh_key_jl="ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEAv+7t3m5Oab6/N+DSubP5nMkBklsYMM7QuGN3Pp0M1WVGQi6kRuR2VxBZrYquPJiIcejcxlmP1TrdTLzZocgsay617pIk+WA1TSYB+29NIyKH833LWPyATI42hXXkfver0M1OZg5HXsEbtjH0lk+seKC9bxruP8ZaGschreygU0E= jl@gromit"
+virtualmaster_ssh_key_mario="ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEAv+7t3m5Oab6/N+DSubP5nMkBklsYMM7QuGN3Pp0M1WVGQi6kRuR2VxBZrYquPJiIcejcxlmP1TrdTLzZocgsay617pIk+WA1TSYB+29NIyKH833LWPyATI42hXXkfver0M1OZg5HXsEbtjH0lk+seKC9bxruP8ZaGschreygU0E= jl@gromit"
+virtualmaster_password_jl='$1$PVJR.2s2$voUQqZYPMdKEpd918Z3iI.'

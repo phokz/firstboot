@@ -1,0 +1,139 @@
+#!/bin/sh -e
+### BEGIN INIT INFO
+# Provides:          virtualmaster
+# Required-Start:    $local_fs
+# Default-Start:     S
+# Short-Description: Configures network and users on first boot of VM
+### END INIT INFO
+# Configures network and users on first boot of VM
+# Main tasks are:
+# - set up networking (IP, gateway, nameservers) on first booot
+# - resize root filesystem to actual size of partition
+# - ensure swap partition has swap signature
+# - set root's password
+# - optionaly create users and add ssh keys
+#
+#
+
+[ -f /etc/virtualmaster.cfg ] || exit 0;
+echo "Running virtualmaster firstboot script"
+. /etc/virtualmaster.cfg
+
+echo "Remounting root rw ... "
+mount / -o remount,rw
+echo "done."
+
+if [ $virtualmaster_version -gt 1 ]; then
+  echo "Warning: virtualmaster.cfg version is > 1"
+fi
+
+virtualmaster_timestamp=`date +%c`
+
+# create new interfaces file
+
+echo "network interfaces"
+
+cat /etc/virtualmaster/network.tpl | \
+  sed -e "s/_virtualmaster_timestamp_/$virtualmaster_timestamp/" |\
+  sed -e "s/_virtualmaster_ipv4_address_/$virtualmaster_ipv4_address/" |\
+  sed -e "s/_virtualmaster_ipv4_netmask_/$virtualmaster_ipv4_netmask/" |\
+  sed -e "s/_virtualmaster_ipv4_gateway_/$virtualmaster_ipv4_gateway/" \
+  > /etc/network/interfaces
+
+echo "resolv.conf"
+
+# create new resolv.conf
+cat /etc/virtualmaster/resolv.tpl | \
+  sed -e "s/_virtualmaster_timestamp_/$virtualmaster_timestamp/" \
+  > /etc/resolv.conf
+
+  for nameserver in $virtualmaster_ipv4_nameservers; do
+    echo "nameserver $nameserver" >> /etc/resolv.conf
+  done
+
+# create hostname files
+echo $virtualmaster_hostname > /etc/hostname
+echo $virtualmaster_hostname > /etc/mailname
+hostname $virtualmaster_hostname
+
+# config /etc/hosts
+virtualmaster_short_hostname=`echo "$virtualmaster_hostname" | cut -d . -f 1`
+
+cat /etc/virtualmaster/hosts.tpl | \
+  sed -e "s/_virtualmaster_timestamp_/$virtualmaster_timestamp/" |\
+  sed -e "s/_virtualmaster_ipv4_address_/$virtualmaster_ipv4_address/" |\
+  sed -e "s/_virtualmaster_hostname_/$virtualmaster_hostname/" |\
+  sed -e "s/_virtualmaster_short_hostname_/$virtualmaster_short_hostname/" \
+  > /etc/hosts
+
+
+# config udev to ensure eth0 is interface with mac address we want
+#commented out since it seems not to be necessary
+#udev_file=`ls -1 /etc/udev/rules.d/*persistent-net.rules || echo /etc/udev/rules.d/60-persistent-net.rules`
+#
+#echo 'SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="'$virtualmaster_eth0_mac'", ATTR{type}=="1", KERNEL=="eth*", NAME="eth0"' \
+#  >> $udev_file
+
+# set root's password
+# no more chpasswd -e in ubuntu karmic, we have to use usermod
+#echo "root:$virtualmaster_password_root" | chpasswd -e
+usermod -p "$virtualmaster_password_root" root
+
+# create users
+for user in $virtualmaster_create_users; do
+  # create user
+  useradd -m "$user" || echo "User $user not added."
+  
+  sshkey_var='virtualmaster_ssh_key_'$user
+  passwd_var='virtualmaster_password_'$user
+  sshkey=`eval echo '$'$sshkey_var`
+  pass=`eval echo '$'$passwd_var`
+  
+#  echo "#################################"
+#  echo "$sshkey_var $passwd_var $sshkey $pass"
+  
+  #import ssh key
+  if [ "x$sshkey" = "x" ]; then
+    echo "Warning, not importing ssh key for user $user, no key supplied."
+  else
+    mkdir -p /home/$user/.ssh
+    echo $sshkey > /home/$user/.ssh/authorized_keys
+    chmod 600 /home/$user/.ssh/authorized_keys
+    chmod 700 /home/$user/.ssh
+    chown -R $user:0 /home/$user/.ssh
+  fi
+  #set password
+  if [ "x$pass" = "x" ]; then
+    echo "Warning, not setting password for user $user, no password supplied."
+  else
+    echo "Setting password for user $user"
+    # same as above, no more chpasswd -e
+    # echo "$user:$pass" | chpasswd -e
+    usermod -p "$pass" $user
+  fi
+done
+
+# generate ssh host keys unless allready present
+if [ ! -f /etc/ssh/ssh_host_rsa_key ]; then
+    echo "Generating new RSA host key for ssh"
+    ssh-keygen -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N ''
+fi
+if [ ! -f /etc/ssh/ssh_host_dsa_key ]; then
+    echo "Generating new DSA host key for ssh"
+    ssh-keygen -t dsa -b 1024 -f /etc/ssh/ssh_host_dsa_key -N ''
+fi
+
+# ensure virtualmaster.cfg is not readable for normal users
+chmod 400 /etc/virtualmaster.cfg
+chown 0:0 /etc/virtualmaster.cfg
+
+# rename virtualmaster.cfg, so that we do not run more than once
+mv /etc/virtualmaster.cfg /etc/virtualmaster.cfg.disabled
+
+echo "Remounting root ro ... "
+sync || echo "Sync failed."
+mount / -o remount,ro || echo "remount / ro failed"
+sync || echo "Sync failed."
+echo "done."
+
+echo "Virtualmaster firstboot finished"

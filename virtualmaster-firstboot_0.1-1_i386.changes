@@ -1,0 +1,31 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Format: 1.7
+Date: Fri, 26 Jun 2009 16:34:09 +0200
+Source: virtualmaster-firstboot
+Binary: virtualmaster-firstboot
+Architecture: source all
+Version: 0.1-1
+Distribution: unstable
+Urgency: low
+Maintainer: Josef Liska <jl@chl.cz>
+Changed-By: Josef Liska <jl@chl.cz>
+Description: 
+ virtualmaster-firstboot - Configures network and users on first boot of VM
+Changes: 
+ virtualmaster-firstboot (0.1-1) unstable; urgency=low
+ .
+   * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+Files: 
+ c0cf6297ccdb47a26678e141cb5a20ee 524 unknown extra virtualmaster-firstboot_0.1-1.dsc
+ 50ccf71c729987a37eaa9cf6adab198c 19526 unknown extra virtualmaster-firstboot_0.1-1.tar.gz
+ 47ce008fcfaa696cf6f83125d229fc4f 13398 unknown extra virtualmaster-firstboot_0.1-1_all.deb
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+
+iD8DBQFKaCztOHOAtoDp/XMRAmfoAKC3HpiSjCWYtdJ+Rh8WYxOvIDeewwCff1l+
+fe8QhoY/7x7FxVvaBy8vMw8=
+=hMp7
+-----END PGP SIGNATURE-----

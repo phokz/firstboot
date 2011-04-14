@@ -1,0 +1,7 @@
+- on ubuntu and debian firstboot script creates user(s) with shell /bin/sh,
+  which is pain
+- ipv6 address, gateway and resolver address should be configured
+  if present in virtualmaster.cfg
+- packages should be signed
+- "štábní kultura"
+- extensive testing

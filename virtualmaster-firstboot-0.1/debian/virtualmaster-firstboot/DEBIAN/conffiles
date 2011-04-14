@@ -1,0 +1,6 @@
+/etc/virtualmaster/network.tpl
+/etc/virtualmaster/network-redhat.tpl
+/etc/virtualmaster/resolv.tpl
+/etc/virtualmaster/hosts.tpl
+/etc/init.d/virtualmaster
+/etc/rcS.d/S01virtualmaster

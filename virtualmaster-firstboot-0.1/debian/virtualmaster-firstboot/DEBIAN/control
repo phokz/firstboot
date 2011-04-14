@@ -1,0 +1,18 @@
+Package: virtualmaster-firstboot
+Version: 0.1-1
+Architecture: all
+Maintainer: Josef Liska <jl@chl.cz>
+Installed-Size: 108
+Section: unknown
+Priority: extra
+Description: Configures network and users on first boot of VM
+  Virtualmaster package is a set of scripts to kickoff freshly installed
+  virtual machine. Most of tasks are performed only once, on first boot.
+  Idea of this package is to have one universal distro-independent config
+  file and then set of distro-specific packages (e.g. .deb, .rpm, .tgz).
+  Main tasks are:
+    - set up networking (IP, gateway, nameservers) on first booot
+    - resize root filesystem to actual size of partition
+    - ensure swap partition has swap signature
+    - set root's password
+    - optionaly create users and add ssh keys
